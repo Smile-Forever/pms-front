@@ -2,7 +2,7 @@ import request from "@/utils/request";
 
 export function loadConfigList(param) {
   return request({
-    url: "/api/rate-limiter/config",
+    url: "/api/sys-config/title/list",
     method: "get",
     params: param
   });

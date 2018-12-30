@@ -33,37 +33,13 @@
         <el-table v-loading="listLoading" :data="tableData" border fit highlight-current-row style="width: 100%;">
 
           <el-table-column label="appId">
-            <template slot-scope="scope">{{scope.row.appId}}</template>
+            <template slot-scope="scope">{{scope.row.id}}</template>
           </el-table-column>
           <el-table-column label="appKey" width="200">
-            <template slot-scope="scope">{{scope.row.appKey}}</template>
+            <template slot-scope="scope">{{scope.row.name}}</template>
           </el-table-column>
-          <el-table-column label="appName" width="200" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.appName}}</template>
-          </el-table-column>
-          <el-table-column label="company" width="100" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.companyName}}</template>
-          </el-table-column>
-          <el-table-column label="developer" width="100" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.developerName}}</template>
-          </el-table-column>
-          <!-- <el-table-column label="type"><template slot-scope="scope">{{scope.row.appType}}</template></el-table-column> -->
-          <el-table-column label="type" width="110">
-            <template slot-scope="scope">
-              <el-tag :type="scope.row.appType | appTypeTagFilter">{{ scope.row.appType | appTypeDescFilter }}</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column label="qps">
-            <template slot-scope="scope">{{scope.row.qps}}</template>
-          </el-table-column>
-          <el-table-column label="Day" width="70" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.limitOfDay}}</template>
-          </el-table-column>
-          <el-table-column label="Hour" width="70" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.limitOfHour}}</template>
-          </el-table-column>
-          <el-table-column label="Minute" width="70" filter-placement="top-end" :show-overflow-tooltip="true">
-            <template slot-scope="scope">{{scope.row.limitOfMinute}}</template>
+          <el-table-column label="appName" width="200">
+            <template slot-scope="scope">{{scope.row.enable}}</template>
           </el-table-column>
           <el-table-column label="Ops">
             <template slot-scope="scope">
@@ -143,110 +119,7 @@
   </div>
 </template>
 
-<script>
-import loadConfigList from "@/api/rate-limiter/rate-limiter.js";
-import clip from "@/utils/clipboard";
-export default {
-  name: "ConfigList",
-  data() {
-    return {
-      listLoading: true,
-      total: 0,
-      table: {
-        title: "限流配置",
-        limiterType: [
-          { type: 0, text: "不限" },
-          { type: -1, text: "全局配置" },
-          { type: 1, text: "顶级客户" },
-          { type: 2, text: "潜在客户" },
-          { type: 3, text: "普通客户" },
-          { type: 4, text: "开发状态客户" }
-        ],
-        pageSizeConfig: [5, 10, 15, 20, 25, 30]
-      },
-      limiter: {
-        appId: 158,
-        keyOfMinute: null,
-        keyOfHour: null,
-        keyOfDay: null,
-        keyOfGlobal: "rtl:gb"
-      },
-      activeName2: "second",
-      searParam: {
-        page: 1,
-        pageSize: 5,
-        appType: 0,
-        appId: null,
-        appKey: null,
-        appName: null
-      },
-      tableData: []
-    };
-  },
-  created() {
-    this.searParam = {
-      page: 1,
-      pageSize: 5,
-      appType: 0,
-      appId: null,
-      appKey: null,
-      appName: null
-    };
-    this.doSearch();
-  },
-  computed: {},
-  methods: {
-    handleCreate() {},
-    handleCopy(text, event) {
-      if (!text) return;
-      clip(text, event);
-    },
-    clipboardSuccess() {
-      this.$message({
-        message: "Copy successfully",
-        type: "success",
-        duration: 1500
-      });
-    },
-    async doSearch() {
-      this.listLoading = true;
-      const data = await loadConfigList(this.searParam);
-      this.tableData = data.data.body.data;
-      this.total = data.data.body.totalCount;
-      this.listLoading = false;
-    },
-    clearCondition() {
-      this.searParam = {
-        page: 1,
-        pageSize: 5,
-        appType: 0,
-        appId: null,
-        appKey: null,
-        appName: null
-      };
-      console.log(this.searParam);
-      this.doSearch();
-    },
-    inputChange() {
-      this.searParam.page = 1;
-    },
-    handleSizeChange(val) {
-      this.searParam.pageSize = val;
-      this.searParam.page = 1;
-      this.doSearch();
-    },
-    handleCurrentChange(val) {
-      this.searParam.page = val;
-      this.doSearch();
-    },
-    handleTypeChange(val) {
-      this.searParam.appType = val;
-      this.searParam.page = 1;
-      this.doSearch();
-    }
-  }
-};
-</script>
+<script src="./config-list.js"></script>
 
 <style>
 .form-item-tmp {

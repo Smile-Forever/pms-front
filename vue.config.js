@@ -15,15 +15,15 @@ module.exports = {
   // // 配置 webpack-dev-server 行为。
   devServer: {
     port: 9528,
-    disableHostCheck: true
-    // proxy: {
-    //   "/api": {
-    //     target: process.env.devServerUri,
-    //     pathRewrite: {
-    //       "^/": "" // rewrite path          // remove base path
-    //     }
-    //   }
-    // } // string | Object
+    disableHostCheck: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        pathRewrite: {
+          "^/": "" // rewrite path          // remove base path
+        }
+      }
+    } // string | Object
   },
   // 三方插件的选项
   pluginOptions: {
