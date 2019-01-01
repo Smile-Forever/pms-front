@@ -21,7 +21,7 @@
               dashboard
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
+          <a target="_blank" href="https://github.com/Smile-Forever/pms-front">
             <el-dropdown-item>
               github
             </el-dropdown-item>
