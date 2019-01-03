@@ -1,11 +1,11 @@
 import request from "@/utils/request";
 
-export function loadConfigList(param) {
+export function getTitleList(param) {
   return request({
-    url: "/api/sys-config/position/list",
+    url: "/api/sys-config/title/list",
     method: "get",
     params: param
   });
 }
 
-export default loadConfigList;
+export default getTitleList;

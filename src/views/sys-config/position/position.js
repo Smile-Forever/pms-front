@@ -12,10 +12,14 @@ export default {
       searParam: {
         page: 1,
         pageSize: 5,
-        id: 0,
         name: "",
-        enable: true
+        enable: null
       },
+      options: [
+        { value: null, label: "全部" },
+        { value: true, label: "是" },
+        { value: false, label: "否" }
+      ],
       tableData: []
     };
   },
@@ -28,7 +32,6 @@ export default {
     async doSearch() {
       this.listLoading = true;
       const data = await getPositionList(this.searParam);
-      debugger;
       this.tableData = data.data.data.data;
       this.listLoading = false;
     },
@@ -36,9 +39,8 @@ export default {
       this.searParam = {
         page: 1,
         pageSize: 5,
-        id: 0,
         name: "",
-        enable: false
+        enable: null
       };
       this.doSearch();
     },

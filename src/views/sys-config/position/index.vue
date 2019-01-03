@@ -3,27 +3,27 @@
     <el-alert :closable="false" title="搜索">
       <div style="margin-bottom:5px;">
         <el-form :inline="true">
-          <el-form-item label="查询类型" class="form-item-tmp">
+          <el-form-item label="是否启用" class="form-item-tmp">
             <el-select
-              v-model="searParam.id"
+              v-model="searParam.enable"
               size="mini"
-              placeholder="类型"
+              placeholder="全部"
               clearable
               class="filter-item"
               style="width: 130px"
               @change="handleTypeChange"
             >
               <el-option
-                v-for="item in table.typeList"
-                :key="item.type"
-                :label="item.text+'('+item.type+')'"
-                :value="item.type"
+                v-for="item in options"
+                :key="item.label"
+                :label="item.label"
+                :value="item.value"
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="搜索条件" class="form-item-tmp">
+          <el-form-item label="名称" class="form-item-tmp">
             <el-input
-              placeholder="条件"
+              placeholder="名称"
               size="mini"
               @keyup.enter.native="doSearch"
               v-model="searParam.name"
@@ -31,9 +31,7 @@
               class="filter-item"
             />
           </el-form-item>
-          <el-form-item label="是否启用" class="form-item-tmp">
-            <el-switch v-model="searParam.enable"></el-switch>
-          </el-form-item>
+          
           <el-form-item style="margin-bottom:1px;" class="form-item-tmp">
             <div>
               <el-button

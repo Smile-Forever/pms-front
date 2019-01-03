@@ -116,7 +116,7 @@ export const asyncRouterMap = [
         name: "staff-basic",
         component: StaffBasic,
         meta: {
-          title: "基资资料",
+          title: "基本资料",
           icon: "el-icon-star-on",
           roles: ["admin"]
         }
