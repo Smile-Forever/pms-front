@@ -28,5 +28,9 @@ module.exports = {
   // 三方插件的选项
   pluginOptions: {
     // ...
-  }
+  },
+  transpileDependencies: [
+    /\/node_modules\/vue-echarts\//,
+    /\/node_modules\/resize-detector\//
+  ]
 };
