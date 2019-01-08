@@ -30,26 +30,133 @@ const chart1Options = {
   }]
 }
 const chart2Options = {
-  tooltip : {
-        formatter: "{a} <br/>{b} : {c}%"
+  tooltip: {
+    formatter: "{a} <br/>{b} : {c}%"
+  },
+  toolbox: {
+    feature: {
+      restore: {},
+      saveAsImage: {}
+    }
+  },
+  series: [{
+    name: 'Mem',
+    type: 'gauge',
+    detail: {
+      formatter: '{value}%'
     },
-    toolbox: {
-        feature: {
-            restore: {},
-            saveAsImage: {}
+    data: []
+  }]
+};
+
+const chart3Options = {
+  tooltip: {
+    formatter: "{a} <br/>{b} : {c}%"
+  },
+  toolbox: {
+    feature: {
+      restore: {},
+      saveAsImage: {}
+    }
+  },
+  series: [{
+    name: 'CPU',
+    type: 'gauge',
+    detail: {
+      formatter: '{value}%'
+    },
+    data: []
+  }]
+};
+
+const cpuInfo = {
+  title: {
+    text: '南丁格尔玫瑰图',
+    subtext: '纯属虚构',
+    x: 'center'
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: "{a} <br/>{b} : {c} ({d}%)"
+  },
+  legend: {
+    x: 'center',
+    y: 'bottom',
+    data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6', 'rose7', 'rose8']
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      mark: {
+        show: true
+      },
+      dataView: {
+        show: true,
+        readOnly: false
+      },
+      magicType: {
+        show: true,
+        type: ['pie', 'funnel']
+      },
+      restore: {
+        show: true
+      },
+      saveAsImage: {
+        show: true
+      }
+    }
+  },
+  calculable: true,
+  series: [{
+      name: 'swap',
+      type: 'pie',
+      radius: [20, 110],
+      center: ['25%', 200],
+      roseType: 'radius',
+      width: '40%', // for funnel
+      max: 40, // for funnel
+      itemStyle: {
+        normal: {
+          label: {
+            show: true
+          },
+          labelLine: {
+            show: true
+          }
+        },
+        emphasis: {
+          label: {
+            show: true
+          },
+          labelLine: {
+            show: true
+          }
         }
-    },
-    series: [
+      },
+      data: [{
+          value: 10,
+          name: 'system'
+        },
         {
-            name: 'CPU',
-            type: 'gauge',
-            detail: {formatter:'{value}%'},
-            data: []
+          value: 5,
+          name: 'user'
+        },
+        {
+          value: 15,
+          name: 'idle'
+        },
+        {
+          value: 25,
+          name: 'wait'
         }
-    ]
+      ]
+    }
+  ]
 };
 
 export {
   chart1Options,
-  chart2Options
+  chart2Options,
+  chart3Options,
+  cpuInfo
 };

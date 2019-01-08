@@ -1,4 +1,4 @@
-import getPositionList from "@/api/sys-config/title.js";
+import getTitleList from "@/api/sys-config/title.js";
 export default {
   name: "SysPosition",
   data() {
@@ -31,7 +31,7 @@ export default {
     handleCreate() {},
     async doSearch() {
       this.listLoading = true;
-      const data = await getPositionList(this.searParam);
+      const data = await getTitleList(this.searParam);
       this.tableData = data.data.data.data;
       this.listLoading = false;
     },
